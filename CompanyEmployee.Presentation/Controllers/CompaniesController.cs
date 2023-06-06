@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployee.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/companies")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    public class CompaniesController : ControllerBase
     {
         private readonly IServiceManager _service;
 
-        public CompanyController(IServiceManager service) => _service = service;
+        public CompaniesController(IServiceManager service) => _service = service;
 
         [HttpGet]
         public IActionResult GetCompanies()
