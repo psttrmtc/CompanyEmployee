@@ -1,6 +1,7 @@
 using CompanyEmployee.Extensions;
 using Contracts;
 using LoggerService;
+using Microsoft.AspNetCore.Mvc;
 using NLog;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,11 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 // Add services to the container.
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 builder.Services.AddControllers(config =>
 {
