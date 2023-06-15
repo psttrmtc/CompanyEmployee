@@ -20,29 +20,28 @@ namespace CompanyEmployee.Presentation.ModelBinders
             }
 
             var providedValue = bindingContext.ValueProvider
-                                    .GetValue(bindingContext.ModelName)
-                                    .ToString();
+                .GetValue(bindingContext.ModelName)
+                .ToString();
             if (string.IsNullOrEmpty(providedValue))
             {
                 bindingContext.Result = ModelBindingResult.Success(null);
                 return Task.CompletedTask;
             }
 
-            var genericType =
-                    bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
-
+            var genericType = bindingContext.ModelType.GetTypeInfo().GenericTypeArguments[0];
             var converter = TypeDescriptor.GetConverter(genericType);
-            var objectArray = providedValue.Split(new[] { "," },
-                    StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => converter.ConvertFromString(x.Trim().TrimStart('(').TrimEnd(')')))
-                    .ToArray();
+
+            var objectArray = providedValue.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x => converter.ConvertFromString(x.Trim().TrimStart('(').TrimEnd(')')))
+                .ToArray();
+
             var guidArray = Array.CreateInstance(genericType, objectArray.Length);
             objectArray.CopyTo(guidArray, 0);
             bindingContext.Model = guidArray;
 
             bindingContext.Result = ModelBindingResult.Success(bindingContext.Model);
             return Task.CompletedTask;
-
         }
     }
+
 }
