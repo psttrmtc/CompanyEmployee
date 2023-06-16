@@ -1,6 +1,7 @@
 using CompanyEmployee.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
 var builder = WebApplication.CreateBuilder(args);
@@ -56,6 +57,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
     new ServiceCollection().AddLogging().AddMvc().AddNewtonsoftJson()
     .Services.BuildServiceProvider()
