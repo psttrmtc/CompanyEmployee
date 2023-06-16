@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.RequestFeatures
 {
-    internal class EmployeeParameters
+    public class EmployeeParameters : RequestParameters
     {
+        public uint MinAge { get; set; }
+        public uint MaxAge { get; set; }
+        public bool ValidAgeRange => MaxAge > MinAge;
+
+        public string? SearchTerm { get; set; }
     }
 }
