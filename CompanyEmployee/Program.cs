@@ -1,8 +1,6 @@
 using CompanyEmployee.Extensions;
 using Contracts;
-using LoggerService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
 var builder = WebApplication.CreateBuilder(args);
